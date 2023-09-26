@@ -4,36 +4,56 @@
 int stack_arr[MAX];
 int top = -1;
 
-void push(int data)
+int isFull()
 {
     if (top == MAX - 1)
+        return 1;
+    else
+        return 0;
+}
+
+int isEmpty()
+{
+    if (top == -1)
+        return 1;
+    else
+        return 0;
+}
+
+void push(int data)
+{
+    if (isFull())
     {
         printf("stack is full.\n");
         return;
     }
-    else
-    {
+
         top = top + 1;
         stack_arr[top] = data;
-        printf("%d\n", stack_arr[top]);
-    }
 }
+
 int pop()
 {
     int value;
-    if (top == -1)
+    if (isEmpty())
     {
         printf("stack is empty.\n");
         exit(1);
     }
-    else
-    {
         value = stack_arr[top];
         top--;
         return value;
-    }
 }
 
+int peek()
+{
+        if (isEmpty())
+        {
+        printf("stack underflow\n");
+        exit(1);
+        }
+        return stack_arr[top];
+}
 void print()
 {
     if (top == -1)
@@ -48,12 +68,41 @@ void print()
 
 int main()
 {
-    int data;
-    push(1);
-    push(2);
-    push(3);
-    push(4);
-    data = pop();
-    print();
-    // printf("%d", data);
+    int choice, data;
+    while (1)
+    {
+        printf("\n");
+        printf("1. Push\n");
+        printf("2. Pop\n");
+        printf("3. Print the top element\n");
+        printf("4. Print all the element of the stack\n");
+        printf("5. Quit\n");
+        printf("Please enter your choice: ");
+        scanf("%d", &choice);
+        switch (choice)
+        {
+        case 1:
+            printf("Enter the element to be pushed: ");
+            scanf("%d", data);
+            push(data);
+            break;
+        case 2:
+            data = pop();
+            printf("The deleted element is %d\n", &data);
+            break;
+        case 3:
+            printf("The topmost element of the stack is %d\n", peek());
+            break;
+        case 4:
+            print();
+            break;
+        case 5:
+            printf("The program is exiting ....");
+            exit(1);
+
+        default:
+            printf("You input wrong choice!!!");
+        }
+    }
+    return 0;
 }
