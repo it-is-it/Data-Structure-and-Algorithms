@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <stdlib.h>
+
 #define MAX 4
 
 int stack_arr[MAX];
@@ -28,8 +30,8 @@ void push(int data)
         return;
     }
 
-        top = top + 1;
-        stack_arr[top] = data;
+    top = top + 1;
+    stack_arr[top] = data;
 }
 
 int pop()
@@ -40,20 +42,22 @@ int pop()
         printf("stack is empty.\n");
         exit(1);
     }
-        value = stack_arr[top];
-        top--;
-        return value;
+
+    value = stack_arr[top];
+    top--;
+    return value;
 }
 
 int peek()
 {
-        if (isEmpty())
-        {
+    if (isEmpty())
+    {
         printf("stack underflow\n");
         exit(1);
-        }
-        return stack_arr[top];
+    }
+    return stack_arr[top];
 }
+
 void print()
 {
     if (top == -1)
@@ -75,7 +79,7 @@ int main()
         printf("1. Push\n");
         printf("2. Pop\n");
         printf("3. Print the top element\n");
-        printf("4. Print all the element of the stack\n");
+        printf("4. Print all the elements of the stack\n");
         printf("5. Quit\n");
         printf("Please enter your choice: ");
         scanf("%d", &choice);
@@ -83,12 +87,12 @@ int main()
         {
         case 1:
             printf("Enter the element to be pushed: ");
-            scanf("%d", data);
+            scanf("%d", &data);
             push(data);
             break;
         case 2:
             data = pop();
-            printf("The deleted element is %d\n", &data);
+            printf("The deleted element is %d\n", data);
             break;
         case 3:
             printf("The topmost element of the stack is %d\n", peek());
@@ -97,11 +101,11 @@ int main()
             print();
             break;
         case 5:
-            printf("The program is exiting ....");
-            exit(1);
+            printf("The program is exiting ....\n");
+            exit(0);
 
         default:
-            printf("You input wrong choice!!!");
+            printf("You input the wrong choice!!!\n");
         }
     }
     return 0;
